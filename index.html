@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A+J Recordings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #1a1412;
+            --bg-warm: #2d1f1a;
+            --bg-card: #3a2a24;
+            --gold: #c9a227;
+            --gold-light: #e8c547;
+            --gold-dim: #8b7019;
+            --ivory: #f5f0e8;
+            --ivory-muted: #d4cfc7;
+            --cream: #ebe4d8;
+            --burgundy: #722f37;
+            --burgundy-deep: #4a1c22;
+            --text-primary: #f5f0e8;
+            --text-secondary: #b8a89a;
+            --text-dim: #8a7a6c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            background: var(--bg-deep);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 80px 40px 60px;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ornament {
+            display: block;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 0.5em;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ivory);
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .logo-ampersand {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold);
+        }
+
+        .tagline {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-secondary);
+            letter-spacing: 0.2em;
+            text-transform: lowercase;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.7s forwards;
+        }
+
+        .divider {
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px auto 0;
+            opacity: 0;
+            animation: expandWidth 1s ease-out 0.9s forwards;
+        }
+
+        @keyframes expandWidth {
+            from {
+                opacity: 0;
+                width: 0;
+            }
+            to {
+                opacity: 1;
+                width: 120px;
+            }
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px 100px;
+        }
+
+        .programme-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .programme-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.1s forwards;
+        }
+
+        .programme-subtitle {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--ivory-muted);
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.3s forwards;
+        }
+
+        .tracks-list {
+            list-style: none;
+        }
+
+        .track-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 28px 0;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+            cursor: pointer;
+            transition: background 0.3s ease, padding-left 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        .track-item:nth-child(1) { animation-delay: 1.4s; }
+        .track-item:nth-child(2) { animation-delay: 1.5s; }
+        .track-item:nth-child(3) { animation-delay: 1.6s; }
+        .track-item:nth-child(4) { animation-delay: 1.7s; }
+        .track-item:nth-child(5) { animation-delay: 1.8s; }
+        .track-item:nth-child(6) { animation-delay: 1.9s; }
+        .track-item:nth-child(7) { animation-delay: 2.0s; }
+        .track-item:nth-child(8) { animation-delay: 2.1s; }
+        .track-item:nth-child(9) { animation-delay: 2.2s; }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .track-item:hover {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.05), transparent);
+            padding-left: 15px;
+        }
+
+        .track-item.active {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.12), transparent);
+            padding-left: 15px;
+        }
+
+        .track-item:first-child {
+            border-top: 1px solid rgba(201, 162, 39, 0.12);
+        }
+
+        .track-number {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--gold-dim);
+            width: 30px;
+            text-align: right;
+        }
+
+        .track-item.active .track-number {
+            color: var(--gold);
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .track-composer {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .track-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--ivory);
+            transition: color 0.3s ease;
+        }
+
+        .track-item:hover .track-title,
+        .track-item.active .track-title {
+            color: var(--gold-light);
+        }
+
+        .track-meta {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .track-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .track-duration {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            min-width: 45px;
+            text-align: right;
+        }
+
+        .play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-dim);
+            background: transparent;
+            color: var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .play-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-deep);
+            transform: scale(1.05);
+        }
+
+        .play-btn:hover::before {
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+
+        .play-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            margin-left: 2px;
+            pointer-events: none;
+        }
+
+        .play-btn .pause-icon {
+            margin-left: 0;
+        }
+
+        .play-btn.playing {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-deep);
+        }
+
+        /* Floating Player */
+        .floating-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, var(--bg-warm), var(--bg-deep));
+            border-top: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 15px 30px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .floating-player.visible {
+            transform: translateY(0);
+        }
+
+        .floating-player-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .floating-player-track {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .floating-player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .floating-player-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: var(--bg-deep);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .floating-play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-play-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            margin-left: 2px;
+        }
+
+        .floating-play-btn .pause-icon {
+            margin-left: 0;
+        }
+
+        .floating-player-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--ivory);
+        }
+
+        .floating-player-composer {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .floating-player-progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .floating-time {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            min-width: 40px;
+        }
+
+        .floating-time.current {
+            text-align: right;
+        }
+
+        .progress-slider {
+            flex: 1;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(201, 162, 39, 0.2);
+            cursor: pointer;
+            outline: none;
+            border-radius: 2px;
+        }
+
+        .progress-slider::-webkit-slider-runnable-track {
+            height: 4px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 2px;
+        }
+
+        .progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -5px;
+            transition: transform 0.15s ease;
+        }
+
+        .progress-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .progress-slider::-moz-range-track {
+            height: 4px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 2px;
+        }
+
+        .progress-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .progress-slider::-moz-range-progress {
+            background: var(--gold);
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .floating-player-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-icon {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-dim);
+            cursor: pointer;
+            transition: fill 0.2s ease;
+        }
+
+        .volume-icon:hover {
+            fill: var(--gold);
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(201, 162, 39, 0.2);
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        footer p {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+
+        footer .ornament {
+            margin: 0 0 15px;
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            opacity: 0.5;
+            animation: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            header {
+                padding: 50px 25px 40px;
+            }
+
+            main {
+                padding: 40px 25px 80px;
+            }
+
+            .track-item {
+                grid-template-columns: 1fr auto;
+                gap: 15px;
+            }
+
+            .track-number {
+                display: none;
+            }
+
+            .track-title {
+                font-size: 1.2rem;
+            }
+
+            .track-controls {
+                gap: 15px;
+            }
+
+            .play-btn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .floating-player {
+                padding: 12px 20px;
+            }
+
+            .floating-player-inner {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .floating-player-right {
+                justify-content: space-between;
+            }
+
+            .volume-control {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                letter-spacing: 0.1em;
+            }
+
+            .tagline {
+                font-size: 0.95rem;
+            }
+
+            .programme-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .track-composer {
+                font-size: 0.75rem;
+            }
+
+            .track-duration {
+                display: none;
+            }
+
+            .floating-player-composer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span class="ornament">&#10087; &#10087; &#10087;</span>
+        <h1 class="logo">A <span class="logo-ampersand">&</span> J Recordings</h1>
+        <p class="tagline">classical recordings & improvisations</p>
+        <div class="divider"></div>
+    </header>
+
+    <main>
+        <div class="programme-header">
+            <p class="programme-title">Programme</p>
+            <p class="programme-subtitle">Selected Works from the Archive</p>
+        </div>
+
+        <ul class="tracks-list" id="tracksList">
+            <!-- Tracks inserted dynamically -->
+        </ul>
+    </main>
+
+    <footer>
+        <span class="ornament">&#10022;</span>
+        <p>A+J Recordings - Est. MMXXV</p>
+    </footer>
+
+    <!-- Floating Player -->
+    <div class="floating-player" id="floatingPlayer">
+        <div class="floating-player-inner">
+            <div class="floating-player-track">
+                <div class="floating-player-info">
+                    <div class="floating-player-controls">
+                        <button class="floating-play-btn" id="floatingPlayBtn">
+                            <svg class="play-icon" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="pause-icon" style="display: none;" viewBox="0 0 24 24">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="floating-player-title" id="floatingTitle">--</div>
+                        <div class="floating-player-composer" id="floatingComposer">--</div>
+                    </div>
+                </div>
+                <div class="floating-player-progress">
+                    <span class="floating-time current" id="floatingCurrentTime">0:00</span>
+                    <input type="range" class="progress-slider" id="floatingProgress" min="0" max="100" step="0.1" value="0">
+                    <span class="floating-time" id="floatingTotalTime">--:--</span>
+                </div>
+            </div>
+            <div class="floating-player-right">
+                <div class="volume-control">
+                    <svg class="volume-icon" id="volumeIcon" viewBox="0 0 24 24">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                    </svg>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base URL for audio files
+        const CDN_BASE_URL = './songs/mp3';
+
+        const tracks = [
+            { id: 1, composer: "L. van Beethoven", title: "Adagio Cantabile", meta: "Pathetique Sonata", performer: "Jeffrey", file: "Beehtoven Adagio Cantable_1.mp3" },
+            { id: 2, composer: "F. Chopin", title: "Mazurka in G Minor", meta: "Op. 67, No. 2", performer: "Andrea", file: "Chopin Mazurka G Minor Op 67 No 2_1.mp3" },
+            { id: 3, composer: "F. Chopin", title: "Nocturne in B-flat Minor", meta: "Op. 9, No. 1", performer: "Andrea", file: "Chopin Nocturne Op 9 no1_1.mp3" },
+            { id: 4, composer: "F. Chopin", title: "Raindrop Prelude", meta: "Op. 28, No. 15", performer: "Jeffrey", file: "Chopin Raindrop Prelude_1.mp3" },
+            { id: 5, composer: "F. Chopin", title: "Waltz in E Minor", meta: "B. 56", performer: "Andrea", file: "Chopin Waltz In E minor B. 56_1.mp3" },
+            { id: 6, composer: "Jeffrey Young", title: "Original in D Major", meta: "Improvisation", performer: "Jeffrey", file: "Jeffrey Original D major_1.mp3" },
+            { id: 7, composer: "W.A. Mozart", title: "Piano Sonata No. 16", meta: "II. Andante", performer: "Jeffrey", file: "Mozart second movement_1.mp3" },
+            { id: 8, composer: "Handel-Halvorsen", title: "Passacaglia", meta: "for Violin and Viola", performer: "Andrea", file: "Passacaglia_1.mp3" },
+            { id: 9, composer: "Nobuo Uematsu", title: "To Zanarkand", meta: "Final Fantasy X", performer: "Andrea", file: "To Zanarkand_1.mp3" }
+        ];
+
+        function getAudioUrl(filename) {
+            return `${CDN_BASE_URL}/${encodeURIComponent(filename)}`;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Single audio element for all tracks
+        const audio = new Audio();
+        audio.preload = 'metadata';
+        audio.volume = 0.6;
+
+        let currentTrackId = null;
+        let isSeeking = false;
+
+        // DOM elements
+        const floatingPlayer = document.getElementById('floatingPlayer');
+        const floatingPlayBtn = document.getElementById('floatingPlayBtn');
+        const floatingPlayIcon = floatingPlayBtn.querySelector('.play-icon');
+        const floatingPauseIcon = floatingPlayBtn.querySelector('.pause-icon');
+        const floatingTitle = document.getElementById('floatingTitle');
+        const floatingComposer = document.getElementById('floatingComposer');
+        const floatingProgress = document.getElementById('floatingProgress');
+        const floatingCurrentTime = document.getElementById('floatingCurrentTime');
+        const floatingTotalTime = document.getElementById('floatingTotalTime');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeIcon = document.getElementById('volumeIcon');
+
+        function createTrackItem(track) {
+            const li = document.createElement('li');
+            li.className = 'track-item';
+            li.dataset.trackId = track.id;
+            li.innerHTML = `
+                <span class="track-number">${track.id}.</span>
+                <div class="track-info">
+                    <span class="track-composer">${track.composer}</span>
+                    <h3 class="track-title">${track.title}</h3>
+                    <span class="track-meta">${track.meta} · Performed by ${track.performer}</span>
+                </div>
+                <div class="track-controls">
+                    <span class="track-duration">--:--</span>
+                    <button class="play-btn" aria-label="Play">
+                        <svg class="play-icon" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="pause-icon" style="display: none;" viewBox="0 0 24 24">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                    </button>
+                </div>
+            `;
+            return li;
+        }
+
+        function updateActiveTrack(trackId) {
+            document.querySelectorAll('.track-item').forEach(item => {
+                item.classList.remove('active');
+                const btn = item.querySelector('.play-btn');
+                const playIcon = btn.querySelector('.play-icon');
+                const pauseIcon = btn.querySelector('.pause-icon');
+
+                if (parseInt(item.dataset.trackId) === trackId && !audio.paused) {
+                    item.classList.add('active');
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                    btn.classList.add('playing');
+                } else {
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                    btn.classList.remove('playing');
+                }
+            });
+        }
+
+        function updateFloatingPlayer() {
+            if (audio.paused) {
+                floatingPlayIcon.style.display = 'block';
+                floatingPauseIcon.style.display = 'none';
+            } else {
+                floatingPlayIcon.style.display = 'none';
+                floatingPauseIcon.style.display = 'block';
+            }
+        }
+
+        function playTrack(trackId) {
+            const track = tracks.find(t => t.id === trackId);
+            if (!track) return;
+
+            if (currentTrackId !== trackId) {
+                audio.src = getAudioUrl(track.file);
+                currentTrackId = trackId;
+                floatingTitle.textContent = track.title;
+                floatingComposer.textContent = track.composer;
+                floatingProgress.value = 0;
+                floatingCurrentTime.textContent = '0:00';
+            }
+
+            audio.play().then(() => {
+                floatingPlayer.classList.add('visible');
+                updateActiveTrack(trackId);
+                updateFloatingPlayer();
+            }).catch(() => {
+                // Autoplay blocked
+            });
+        }
+
+        function pauseTrack() {
+            audio.pause();
+            updateActiveTrack(currentTrackId);
+            updateFloatingPlayer();
+        }
+
+        function togglePlayPause() {
+            if (audio.paused) {
+                if (currentTrackId) {
+                    audio.play();
+                    updateActiveTrack(currentTrackId);
+                    updateFloatingPlayer();
+                }
+            } else {
+                pauseTrack();
+            }
+        }
+
+        // Audio event listeners
+        audio.addEventListener('loadedmetadata', () => {
+            floatingTotalTime.textContent = formatTime(audio.duration);
+            // Update track duration in list
+            if (currentTrackId) {
+                const trackItem = document.querySelector(`[data-track-id="${currentTrackId}"]`);
+                if (trackItem) {
+                    trackItem.querySelector('.track-duration').textContent = formatTime(audio.duration);
+                }
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration && !isSeeking) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                floatingProgress.value = percent;
+                floatingCurrentTime.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            updateActiveTrack(null);
+            updateFloatingPlayer();
+            floatingProgress.value = 0;
+            floatingCurrentTime.textContent = '0:00';
+
+            // Auto-play next track
+            const nextTrackId = currentTrackId + 1;
+            if (tracks.find(t => t.id === nextTrackId)) {
+                playTrack(nextTrackId);
+            }
+        });
+
+        audio.addEventListener('play', () => {
+            updateActiveTrack(currentTrackId);
+            updateFloatingPlayer();
+        });
+
+        audio.addEventListener('pause', () => {
+            updateActiveTrack(currentTrackId);
+            updateFloatingPlayer();
+        });
+
+        // Floating player controls
+        floatingPlayBtn.addEventListener('click', togglePlayPause);
+
+        // Track when user starts dragging
+        floatingProgress.addEventListener('pointerdown', () => {
+            isSeeking = true;
+        });
+
+        // Track when user stops dragging (with delay to prevent race condition)
+        document.addEventListener('pointerup', () => {
+            if (isSeeking) {
+                setTimeout(() => { isSeeking = false; }, 150);
+            }
+        });
+
+        // Update time display during drag
+        floatingProgress.addEventListener('input', () => {
+            isSeeking = true;
+            if (audio.duration) {
+                floatingCurrentTime.textContent = formatTime((floatingProgress.value / 100) * audio.duration);
+            }
+        });
+
+        // Seek and play when user releases slider
+        floatingProgress.addEventListener('change', async () => {
+            // Wait for metadata if not loaded yet
+            if (!audio.duration && audio.src) {
+                await new Promise(resolve => {
+                    if (audio.readyState >= 1) {
+                        resolve();
+                    } else {
+                        audio.addEventListener('loadedmetadata', resolve, { once: true });
+                    }
+                });
+            }
+
+            if (audio.duration) {
+                audio.currentTime = (floatingProgress.value / 100) * audio.duration;
+            }
+
+            // Always play from new position
+            if (currentTrackId) {
+                audio.play().then(() => {
+                    updateActiveTrack(currentTrackId);
+                    updateFloatingPlayer();
+                }).catch(() => {});
+            }
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = parseFloat(volumeSlider.value);
+        });
+
+        volumeIcon.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                volumeSlider.dataset.prevVolume = audio.volume;
+                audio.volume = 0;
+                volumeSlider.value = 0;
+            } else {
+                audio.volume = parseFloat(volumeSlider.dataset.prevVolume || 0.6);
+                volumeSlider.value = audio.volume;
+            }
+        });
+
+        // Initialize tracks
+        const tracksList = document.getElementById('tracksList');
+        tracks.forEach(track => {
+            const item = createTrackItem(track);
+            tracksList.appendChild(item);
+
+            const playBtn = item.querySelector('.play-btn');
+            playBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (currentTrackId === track.id && !audio.paused) {
+                    pauseTrack();
+                } else {
+                    playTrack(track.id);
+                }
+            });
+
+            // Preload duration
+            const tempAudio = new Audio();
+            tempAudio.src = getAudioUrl(track.file);
+            tempAudio.preload = 'metadata';
+            tempAudio.addEventListener('loadedmetadata', () => {
+                item.querySelector('.track-duration').textContent = formatTime(tempAudio.duration);
+            });
+        });
+    </script>
+</body>
+</html>

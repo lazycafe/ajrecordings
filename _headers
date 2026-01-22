@@ -1,0 +1,6 @@
+# Enable byte-range requests for audio files to allow seeking
+/songs/*
+  Accept-Ranges: bytes
+
+/songs/mp3/*
+  Accept-Ranges: bytes
