@@ -718,7 +718,7 @@
             { id: 5, composer: "F. Chopin", title: "Waltz in E Minor", meta: "B. 56", performer: "Andrea", file: "Chopin Waltz In E minor B. 56_1.mp3" },
             { id: 6, composer: "Jeffrey Young", title: "Original in D Major", meta: "Improvisation", performer: "Jeffrey", file: "Jeffrey Original D major_1.mp3" },
             { id: 7, composer: "W.A. Mozart", title: "Piano Sonata No. 16", meta: "II. Andante", performer: "Jeffrey", file: "Mozart second movement_1.mp3" },
-            { id: 8, composer: "Handel-Halvorsen", title: "Passacaglia", meta: "for Violin and Viola", performer: "Andrea", file: "Passacaglia_1.mp3" },
+            { id: 8, composer: "Handel-Halvorsen", title: "Passacaglia", meta: "Piano Solo", performer: "Andrea", file: "Passacaglia_1.mp3" },
             { id: 9, composer: "Nobuo Uematsu", title: "To Zanarkand", meta: "Final Fantasy X", performer: "Andrea", file: "To Zanarkand_1.mp3" }
         ];
 
@@ -953,6 +953,18 @@
             } else {
                 audio.volume = parseFloat(volumeSlider.dataset.prevVolume || 0.6);
                 volumeSlider.value = audio.volume;
+            }
+        });
+
+        // Spacebar to play/pause
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && !e.target.matches('input, textarea, button')) {
+                e.preventDefault();
+                if (currentTrackId) {
+                    togglePlayPause();
+                } else if (tracks.length > 0) {
+                    playTrack(tracks[0].id);
+                }
             }
         });
 
